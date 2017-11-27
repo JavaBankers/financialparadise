@@ -17,8 +17,8 @@ public class StatementBuilider {
         StringBuilder sb = new StringBuilder();
         sb.append("CREATE TABLE bank.account ( ");
         sb.append("id SERIAL PRIMARY KEY,");
-        sb.append("balance numeric(9, 2) NOT NULL,");
-        sb.append("currency character varying(20) DEFAULT 'PLN' NOT NULL,");
+        sb.append("balance NUMERIC(9, 2) NOT NULL,");
+        sb.append("currency character varying(20) DEFAULT 'PLN' NOT NULL);");
         return sb.toString();
     }
 
@@ -26,17 +26,9 @@ public class StatementBuilider {
         StringBuilder sb = new StringBuilder();
         sb.append("CREATE TABLE bank.transfer_history ( ");
         sb.append("id SERIAL PRIMARY KEY,");
-        sb.append("bank_account character varying(30) NOT NULL,");
+        sb.append("number_bank_account character varying(30) NOT NULL,");
         sb.append("date date NOT NULL,");
-        sb.append("amount numeric(9, 2) NOT NULL,");
-        return sb.toString();
-    }
-
-    public static String getConstraintsToCustomer(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("ALTER TABLE bank.customer ");
-        sb.append("add column customer_id integer NOT NULL,");
-        sb.append("add constraint fk_customer_id FOREIGN KEY (customer_id) references bank.customer (id);");
+        sb.append("amount numeric(9, 2) NOT NULL);");
         return sb.toString();
     }
 
