@@ -39,8 +39,7 @@ public class TableManager {
         createStatement(StatementBuilider.getCreateCustomerTableStatement());
         createStatement(StatementBuilider.getCreateAccountTableStatement());
         createStatement(StatementBuilider.getCreateTransferHistoryTableStatement());
-        createStatement(StatementBuilider.getConstraintsToCustomer());
         createStatement(StatementBuilider.getConstraintsToAccount());
-        createStatement(StatementBuilider.getCreateTransferHistoryTableStatement());
+        createStatement(StatementBuilider.getConstraintsToTransferHistoryDeparting());
     }
 }
