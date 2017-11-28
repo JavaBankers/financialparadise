@@ -14,7 +14,7 @@ public class CustomerTest {
     private final static String FIRSTNAME = "Andrzej";
     private final static String LASTNAME = "Gablota";
     private final static String PESEL = "67112456789";
-    private final static String USERNAME = "andrew";
+    private final static String EMAIL = "andrew@yahoo.com";
     private final static String PASSWORD = "isthebest";
 
     @Before
@@ -24,7 +24,7 @@ public class CustomerTest {
         testedObject.setFirstname(FIRSTNAME);
         testedObject.setLastname(LASTNAME);
         testedObject.setPesel(PESEL);
-        testedObject.setUsername(USERNAME);
+        testedObject.setEmail(EMAIL);
         testedObject.setPassword(PASSWORD);
     }
 
@@ -35,7 +35,7 @@ public class CustomerTest {
         assertThat(testedObject.getFirstname()).isEqualTo("Andrzej");
         assertThat(testedObject.getLastname()).isEqualTo("Gablota");
         assertThat(testedObject.getPesel()).isEqualTo("67112456789");
-        assertThat(testedObject.getUsername()).isEqualTo("andrew");
+        assertThat(testedObject.getEmail()).isEqualTo("andrew@yahoo.com");
         assertThat(testedObject.getPassword()).isEqualTo("isthebest");
     }
 }

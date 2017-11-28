@@ -22,7 +22,7 @@ public class CustomerService {
 
     @Transactional
     public Customer getCustomerById(Integer id){
-        return customerRepository.findById(id);
+        return customerRepository.findCustomerById(id);
     }
 
     @Transactional
