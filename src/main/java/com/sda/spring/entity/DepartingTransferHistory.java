@@ -3,24 +3,24 @@ package com.sda.spring.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "transfer_history")
 public class DepartingTransferHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "customer_id")
     private Integer customerId;
 
+    @Column(name = "number_bank_account")
     private String bankAccountNumber;
 
     private LocalDateTime date;
