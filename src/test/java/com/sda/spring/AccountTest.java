@@ -37,8 +37,8 @@ public class AccountTest {
         assertThat(testedObject.getId()).isEqualTo(1);
         assertThat(testedObject.getBalance()).isEqualTo(new BigDecimal("1579.84"));
         assertThat(testedObject.getCurrency()).isEqualTo(Currency.PLN);
-        assertThat(testedObject.getCustomer().getFirstname()).isEqualTo("Tom");
-        assertThat(testedObject.getCustomer().getLastname()).isEqualTo("Bom");
+        assertThat(testedObject.getCustomer().getFirstName()).isEqualTo("Tom");
+        assertThat(testedObject.getCustomer().getLastName()).isEqualTo("Bom");
         assertThat(testedObject.getCustomer().getPesel()).isEqualTo("78120644556");
         assertThat(testedObject.getCustomer().getEmail()).isEqualTo("thomas123@gmail.com");
         assertThat(testedObject.getCustomer().getPassword()).isEqualTo("thomas456");

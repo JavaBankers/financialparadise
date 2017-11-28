@@ -19,7 +19,7 @@ public class Account {
     private Currency currency;
 
     @OneToOne
-    @Column(name = "customer_id")
+
     private Customer customer;
 
     public Account() {
