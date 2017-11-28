@@ -21,8 +21,8 @@ public class CustomerTest {
     public void setUp() throws Exception {
         testedObject = new Customer();
         testedObject.setId(ID);
-        testedObject.setFirstname(FIRSTNAME);
-        testedObject.setLastname(LASTNAME);
+        testedObject.setFirstName(FIRSTNAME);
+        testedObject.setLastName(LASTNAME);
         testedObject.setPesel(PESEL);
         testedObject.setEmail(EMAIL);
         testedObject.setPassword(PASSWORD);
@@ -32,8 +32,8 @@ public class CustomerTest {
     public void shouldCreateObject() throws Exception {
         assertThat(testedObject).isNotNull();
         assertThat(testedObject.getId()).isEqualTo(69);
-        assertThat(testedObject.getFirstname()).isEqualTo("Andrzej");
-        assertThat(testedObject.getLastname()).isEqualTo("Gablota");
+        assertThat(testedObject.getFirstName()).isEqualTo("Andrzej");
+        assertThat(testedObject.getLastName()).isEqualTo("Gablota");
         assertThat(testedObject.getPesel()).isEqualTo("67112456789");
         assertThat(testedObject.getEmail()).isEqualTo("andrew@yahoo.com");
         assertThat(testedObject.getPassword()).isEqualTo("isthebest");

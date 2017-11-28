@@ -16,7 +16,19 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     @Transactional
-    public void addCustomer(Customer customer){
+    public void addCustomer(String firstName,
+                            String lastName,
+                            String pesel,
+                            String email,
+                            String password){
+
+        Customer customer = new Customer();
+        customer.setFirstName(firstName);
+        customer.setLastName(lastName);
+        customer.setPesel(pesel);
+        customer.setEmail(email);
+        customer.setPassword(password);
+
         customerRepository.save(customer);
     }
 
@@ -34,8 +46,12 @@ public class CustomerService {
     }
 
     @Transactional
-    public void updateCustomer(Customer customer){
-        customerRepository.save(customer);
+    public void updateCustomer(String firstName,
+                               String lastName,
+                               String pesel,
+                               String email,
+                               String password){
+        addCustomer(firstName,lastName,pesel,email,password);
     }
 
     @Transactional
