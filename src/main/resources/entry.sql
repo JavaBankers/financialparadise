@@ -4,7 +4,7 @@ create TABLE bank.customer
 (
 id INTEGER not NULL,
 firstname VARCHAR (255),
-lastname VARCHAR (255),
+lastName VARCHAR (255),
 pesel VARCHAR (11),
 email VARCHAR (60),
 password VARCHAR (80)
@@ -26,9 +26,9 @@ actorid INTEGER,
 PRIMARY KEY (id)
 );
 
-INSERT INTO moviedb.actor (id, firstname, lastname) VALUES (1, 'Arnold', 'Szwarceneger');
-INSERT INTO moviedb.actor (id, firstname, lastname) VALUES (2, 'Stach', 'De Niro');
-INSERT INTO moviedb.actor (id, firstname, lastname) VALUES (3, 'Olek', 'Paczino');
+INSERT INTO moviedb.actor (id, firstname, lastName) VALUES (1, 'Arnold', 'Szwarceneger');
+INSERT INTO moviedb.actor (id, firstname, lastName) VALUES (2, 'Stach', 'De Niro');
+INSERT INTO moviedb.actor (id, firstname, lastName) VALUES (3, 'Olek', 'Paczino');
 
 INSERT INTO moviedb.movie (id, title) VALUES (1, 'Ogniem i Springiem');
 INSERT INTO moviedb.movie (id, title) VALUES (2, 'Atak Beanów');
