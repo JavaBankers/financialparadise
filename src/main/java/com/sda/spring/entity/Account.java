@@ -4,10 +4,7 @@ import com.sda.spring.Currency;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -22,6 +19,7 @@ public class Account {
     private Currency currency;
 
     @OneToOne
+    @Column(name = "customer_id")
     private Customer customer;
 
     public Account() {
