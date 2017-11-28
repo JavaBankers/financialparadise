@@ -9,5 +9,5 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 
     @Transactional
     void deleteCustomerById(Integer id);
-    Customer findById(Integer id);
+    Customer findCustomerById(Integer id);
 }

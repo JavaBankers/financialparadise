@@ -18,17 +18,17 @@ public class Customer {
     private String firstname;
     private String lastname;
     private String pesel;
-    private String username;
+    private String email;
     private String password;
 
     public Customer() {
     }
 
-    public Customer(String firstname, String lastname, String pesel, String username, String password) {
+    public Customer(String firstname, String lastname, String pesel, String email, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.pesel = pesel;
-        this.username = username;
+        this.email = email;
         this.password = password;
     }
 }

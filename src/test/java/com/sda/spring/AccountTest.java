@@ -19,7 +19,7 @@ public class AccountTest {
     private final static String FIRSTNAME = "Tom";
     private final static String LASTNAME = "Bom";
     private final static String PESEL = "78120644556";
-    private final static String USERNAME = "thomas123";
+    private final static String EMAIL = "thomas123@gmail.com";
     private final static String PASSWORD = "thomas456";
 
     @Before
@@ -28,7 +28,7 @@ public class AccountTest {
         testedObject.setId(ID);
         testedObject.setBalance(BALANCE);
         testedObject.setCurrency(CURRENCY);
-        testedObject.setCustomer(new Customer(FIRSTNAME, LASTNAME, PESEL, USERNAME, PASSWORD));
+        testedObject.setCustomer(new Customer(FIRSTNAME, LASTNAME, PESEL, EMAIL, PASSWORD));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class AccountTest {
         assertThat(testedObject.getCustomer().getFirstname()).isEqualTo("Tom");
         assertThat(testedObject.getCustomer().getLastname()).isEqualTo("Bom");
         assertThat(testedObject.getCustomer().getPesel()).isEqualTo("78120644556");
-        assertThat(testedObject.getCustomer().getUsername()).isEqualTo("thomas123");
+        assertThat(testedObject.getCustomer().getEmail()).isEqualTo("thomas123@gmail.com");
         assertThat(testedObject.getCustomer().getPassword()).isEqualTo("thomas456");
     }
 }
