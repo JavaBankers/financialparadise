@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -20,11 +21,11 @@ public class DepartingTransferHistory {
 
     private Integer customerId;
 
-    private String bankAccount;
+    private String bankAccountNumber;
 
     private LocalDateTime date;
 
-    private Double amount;
+    private BigDecimal amount;
 
     public DepartingTransferHistory() {
     }
