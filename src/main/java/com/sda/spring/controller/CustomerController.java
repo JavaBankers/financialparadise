@@ -1,4 +1,4 @@
-package com.sda.spring;
+package com.sda.spring.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CustomerController {
 
     @RequestMapping("/")
-    public String hello(){
-        return "hello";
+    public String mainPage(){
+        return "mainPage";
     }
 }
