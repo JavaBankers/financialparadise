@@ -19,7 +19,6 @@ public class Account {
     private Currency currency;
 
     @OneToOne
-
     private Customer customer;
 
     public Account() {
