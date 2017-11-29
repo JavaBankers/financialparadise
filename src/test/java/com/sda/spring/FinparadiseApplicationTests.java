@@ -12,5 +12,4 @@ public class FinparadiseApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }
