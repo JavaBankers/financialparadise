@@ -15,17 +15,18 @@ public class Account {
     @Id
     @GeneratedValue
     private Integer id;
+    private String bankAccountNumber;
     private BigDecimal balance;
-    private Currency currency;
+    private Currency currency = Currency.PLN;
 
     @OneToOne
-    @Column(name = "customer_id")
     private Customer customer;
 
     public Account() {
     }
 
-    public Account(BigDecimal balance, Currency currency, Customer customer) {
+    public Account(String bankAccountNumber, BigDecimal balance, Currency currency, Customer customer) {
+        this.bankAccountNumber = bankAccountNumber;
         this.balance = balance;
         this.currency = currency;
         this.customer = customer;
