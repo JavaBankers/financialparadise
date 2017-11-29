@@ -16,7 +16,7 @@ public class MoneyTransferService {
         return LocalDateTime.now();
     }
 
-    public void transferMoney(Account accountFrom, Account accountTo, BigDecimal moneyToTransfer) throws InsufficientFundsException{
+    public void transferMoney(Account accountFrom, Account accountTo, BigDecimal moneyToTransfer) {
 
         if(moneyToTransfer.compareTo(accountFrom.getBalance()) < 1 && accountFrom.getBalance().compareTo(BALANCE_LIMIT) >= 0){
             accountFrom.setBalance(accountFrom.getBalance().subtract(moneyToTransfer));

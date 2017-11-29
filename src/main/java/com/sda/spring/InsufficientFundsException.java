@@ -1,7 +1,11 @@
 package com.sda.spring;
 
-public class InsufficientFundsException extends Exception {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+public class InsufficientFundsException extends RuntimeException {
     public InsufficientFundsException(){
-        super("SORRY, INSUFFICIENT FUNDS");
+        super();
     }
 }
