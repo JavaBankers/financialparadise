@@ -17,8 +17,6 @@ public class Customer {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-//    @PeselValidator
-//    @Size(min = 11)
     private String pesel;
     private String email;
     private String password;
