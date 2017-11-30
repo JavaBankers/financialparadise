@@ -25,26 +25,22 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
-    @PutMapping(value = "/update")
-    public String updateCustomer(@ModelAttribute("firstName") String firstName,
-                                 @ModelAttribute("lastName") String lastName,
-                                 @ModelAttribute("pesel") String pesel,
-                                 @ModelAttribute("email") String email,
-                                 @ModelAttribute("password") String password){
-
-        customerService.updateCustomer(firstName,lastName,pesel,email,password);
-        return "Customer has been updated";
-    }
+//    @RequestMapping(value = "/update", method = RequestMethod.POST)
+//    public String updateCustomer(@ModelAttribute("firstName") String firstName,
+//                                 @ModelAttribute("lastName") String lastName,
+//                                 @ModelAttribute("pesel") String pesel,
+//                                 @ModelAttribute("email") String email,
+//                                 @ModelAttribute("password") String password){
+//
+//        customerService.updateCustomer(firstName,lastName,pesel,email,password);
+//        return "Customer has been updated";
+//    }
 
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addCustomer(@ModelAttribute("firstName") String firstName,
-                              @ModelAttribute("lastName") String lastName,
-                              @ModelAttribute("pesel") String pesel,
-                              @ModelAttribute("email") String email,
-                              @ModelAttribute("password") String password){
-
-        customerService.addCustomer(firstName,lastName,pesel,email,password);
+    public String addCustomer(@ModelAttribute("customer") Customer customer){
+//        Customer customer = new Customer(firstName, lastName, pesel, email, password);
+        customerService.addCustomer(customer);
         return "New customer has been added";
     }
 }

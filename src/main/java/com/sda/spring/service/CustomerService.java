@@ -20,13 +20,7 @@ public class CustomerService {
     }
 
     @Transactional
-    public void addCustomer(String firstName,
-                            String lastName,
-                            String pesel,
-                            String email,
-                            String password){
-
-        Customer customer = new Customer(firstName, lastName, pesel, email, password);
+    public void addCustomer(Customer customer){
         customerRepository.save(customer);
     }
 
@@ -42,14 +36,14 @@ public class CustomerService {
         return customers;
     }
 
-    @Transactional
-    public void updateCustomer(String firstName,
-                               String lastName,
-                               String pesel,
-                               String email,
-                               String password){
-        addCustomer(firstName,lastName,pesel,email,password);
-    }
+//    @Transactional
+//    public void updateCustomer(String firstName,
+//                               String lastName,
+//                               String pesel,
+//                               String email,
+//                               String password){
+//        addCustomer(firstName,lastName,pesel,email,password);
+//    }
 
     @Transactional
     public void deleteCustomerById(Integer id){
