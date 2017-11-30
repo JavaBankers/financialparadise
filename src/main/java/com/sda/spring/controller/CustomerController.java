@@ -38,11 +38,12 @@ public class CustomerController {
 
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addCustomer(@ModelAttribute String firstName,
-                              @ModelAttribute String lastName,
-                              @ModelAttribute String pesel,
-                              @ModelAttribute String email,
-                              @ModelAttribute String password){
+    public String addCustomer(@ModelAttribute("firstName") String firstName,
+                              @ModelAttribute("lastName") String lastName,
+                              @ModelAttribute("pesel") String pesel,
+                              @ModelAttribute("email") String email,
+                              @ModelAttribute("password") String password){
+        System.out.println("firstName: " + firstName + "/ pesel: " + pesel);
 
         customerService.addCustomer(firstName,lastName,pesel,email,password);
         return "New customer has been added";
