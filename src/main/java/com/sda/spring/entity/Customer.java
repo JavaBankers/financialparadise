@@ -1,5 +1,6 @@
 package com.sda.spring.entity;
 
+import com.sda.spring.validation.PeselValidator;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,7 @@ public class Customer {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+    @PeselValidator()
     private String pesel;
     private String email;
     private String password;
