@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class Account {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String bankAccountNumber;
     private BigDecimal balance;

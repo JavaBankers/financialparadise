@@ -26,11 +26,11 @@ public class CustomerController {
     }
 
     @PutMapping(value = "/update")
-    public String updateCustomer(@ModelAttribute String firstName,
-                                 @ModelAttribute String lastName,
-                                 @ModelAttribute String pesel,
-                                 @ModelAttribute String email,
-                                 @ModelAttribute String password){
+    public String updateCustomer(@ModelAttribute("firstName") String firstName,
+                                 @ModelAttribute("lastName") String lastName,
+                                 @ModelAttribute("pesel") String pesel,
+                                 @ModelAttribute("email") String email,
+                                 @ModelAttribute("password") String password){
 
         customerService.updateCustomer(firstName,lastName,pesel,email,password);
         return "Customer has been updated";
@@ -43,7 +43,6 @@ public class CustomerController {
                               @ModelAttribute("pesel") String pesel,
                               @ModelAttribute("email") String email,
                               @ModelAttribute("password") String password){
-        System.out.println("firstName: " + firstName + "/ pesel: " + pesel);
 
         customerService.addCustomer(firstName,lastName,pesel,email,password);
         return "New customer has been added";

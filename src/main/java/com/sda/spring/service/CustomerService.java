@@ -15,6 +15,10 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
     @Transactional
     public void addCustomer(String firstName,
                             String lastName,
@@ -22,13 +26,7 @@ public class CustomerService {
                             String email,
                             String password){
 
-        Customer customer = new Customer();
-        customer.setFirstName(firstName);
-        customer.setLastName(lastName);
-        customer.setPesel(pesel);
-        customer.setEmail(email);
-        customer.setPassword(password);
-
+        Customer customer = new Customer(firstName, lastName, pesel, email, password);
         customerRepository.save(customer);
     }
 
@@ -40,8 +38,7 @@ public class CustomerService {
     @Transactional
     public List<Customer> getAllCustomers(){
         List<Customer> customers = new ArrayList<>();
-        Iterable<Customer> iterable = customerRepository.findAll();
-        iterable.forEach(e -> customers.add(e));
+        customerRepository.findAll().forEach(e -> customers.add(e));
         return customers;
     }
 

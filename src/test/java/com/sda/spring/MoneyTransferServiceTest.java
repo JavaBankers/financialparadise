@@ -61,7 +61,6 @@ public class MoneyTransferServiceTest {
     public void shouldThrowInsufficientFundsExceptionWhenMoneyToTransferBiggerThanAcountOneBalance() throws Exception {
 
         thrown.expect(InsufficientFundsException.class);
-        thrown.expectMessage("SORRY, INSUFFICIENT FUNDS");
 
         Account accountOne = new Account();
         accountOne.setId(1);

@@ -18,6 +18,10 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
+    public AccountService(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
+
     @Transactional
     public void addAccount(String firstName,
                            String lastName,
@@ -25,12 +29,7 @@ public class AccountService {
                            String email,
                            String password) {
 
-        Customer customer = new Customer();
-        customer.setFirstName(firstName);
-        customer.setLastName(lastName);
-        customer.setPesel(pesel);
-        customer.setEmail(email);
-        customer.setPassword(password);
+        Customer customer = new Customer(firstName, lastName, pesel, email, password);
         Account account = new Account();
         account.setBalance(new BigDecimal("0.00"));
         account.setCurrency(Currency.PLN);
@@ -47,8 +46,7 @@ public class AccountService {
     @Transactional
     public List<Account> getAllAccounts() {
         List<Account> accounts = new ArrayList<>();
-        Iterable<Account> iterable = accountRepository.findAll();
-        iterable.forEach(e -> accounts.add(e));
+        accountRepository.findAll().forEach(e -> accounts.add(e));
         return accounts;
     }
 
