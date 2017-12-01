@@ -25,29 +25,21 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
-//    @RequestMapping(value = "/update", method = RequestMethod.POST)
-//    public String updateCustomer(@ModelAttribute("firstName") String firstName,
-//                                 @ModelAttribute("lastName") String lastName,
-//                                 @ModelAttribute("pesel") String pesel,
-//                                 @ModelAttribute("email") String email,
-//                                 @ModelAttribute("password") String password){
-//
-//        customerService.updateCustomer(firstName,lastName,pesel,email,password);
-//        return "Customer has been updated";
-//    }
-
-
     @PostMapping(value = CUSTOMER_URL)
     public String addCustomer(@RequestBody Customer customer) {
-//        Customer customer = new Customer(firstName, lastName, pesel, email, password);
         customerService.save(customer);
         return "New customer has been added";
     }
 
     @PutMapping(value = CUSTOMER_URL)
     public String updateCustomer(@RequestBody Customer customer) {
-//        Customer customer = new Customer(firstName, lastName, pesel, email, password);
         customerService.save(customer);
-        return "New customer has been added";
+        return "Customer has been updated";
+    }
+
+    @DeleteMapping(value = CUSTOMER_URL+ "/{id}")
+    public String deleteCustomer(@PathVariable("id") Integer id) {
+        customerService.deleteCustomerById(id);
+        return "Customer has been deleted";
     }
 }
