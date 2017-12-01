@@ -20,7 +20,7 @@ public class CustomerService {
     }
 
     @Transactional
-    public void addCustomer(Customer customer){
+    public void save(Customer customer){
         customerRepository.save(customer);
     }
 
@@ -42,7 +42,7 @@ public class CustomerService {
 //                               String pesel,
 //                               String email,
 //                               String password){
-//        addCustomer(firstName,lastName,pesel,email,password);
+//        save(firstName,lastName,pesel,email,password);
 //    }
 
     @Transactional

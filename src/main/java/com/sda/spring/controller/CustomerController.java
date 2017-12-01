@@ -3,25 +3,25 @@ package com.sda.spring.controller;
 import com.sda.spring.entity.Customer;
 import com.sda.spring.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/customers")
 public class CustomerController {
+
+    private static final String CUSTOMER_URL = "/v1/customer";
 
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping("/find/all")
-    public List<Customer> getAllCustomers(){
+    @GetMapping("/v1/customers")
+    public List<Customer> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 
-    @GetMapping("/find/{id}")
-    public Customer getCustomerById(@PathVariable("id") Integer id){
+    @GetMapping(CUSTOMER_URL + "/{id}")
+    public Customer getCustomerById(@PathVariable("id") Integer id) {
         return customerService.getCustomerById(id);
     }
 
@@ -37,10 +37,17 @@ public class CustomerController {
 //    }
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addCustomer(@ModelAttribute("customer") Customer customer){
+    @PostMapping(value = CUSTOMER_URL)
+    public String addCustomer(@RequestBody Customer customer) {
 //        Customer customer = new Customer(firstName, lastName, pesel, email, password);
-        customerService.addCustomer(customer);
+        customerService.save(customer);
+        return "New customer has been added";
+    }
+
+    @PutMapping(value = CUSTOMER_URL)
+    public String updateCustomer(@RequestBody Customer customer) {
+//        Customer customer = new Customer(firstName, lastName, pesel, email, password);
+        customerService.save(customer);
         return "New customer has been added";
     }
 }
