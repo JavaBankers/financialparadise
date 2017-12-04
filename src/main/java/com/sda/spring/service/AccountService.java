@@ -22,21 +22,17 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    @Transactional
-    public void addAccount(String firstName,
-                           String lastName,
-                           String pesel,
-                           String email,
-                           String password) {
-
-        Customer customer = new Customer(firstName, lastName, pesel, email, password);
-        Account account = new Account();
-        account.setBalance(new BigDecimal("0.00"));
-        account.setCurrency(Currency.PLN);
-        account.setCustomer(customer);
-
-        accountRepository.save(account);
-    }
+//    @Transactional
+//    public void addAccount(String firstName,
+//                           String lastName,
+//                           String pesel,
+//                           String email,
+//                           String password) {
+//
+//        Customer customer = new Customer(firstName, lastName, pesel, email, password);
+//
+//        accountRepository.save(account);
+//    }
 
     @Transactional
     public Account getAccountById(Integer id) {

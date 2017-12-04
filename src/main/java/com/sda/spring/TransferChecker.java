@@ -1,9 +1,6 @@
 package com.sda.spring;
 
-import com.sda.spring.entity.Account;
-import com.sda.spring.entity.SuspiciousPerson;
-import com.sda.spring.entity.SuspiciousTransferHistory;
-import com.sda.spring.entity.TransferHistory;
+import com.sda.spring.entity.*;
 import com.sda.spring.repository.SuspiciousPersonRepository;
 import com.sda.spring.service.TransferHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,75 +24,34 @@ public class TransferChecker {
 
     private final static Integer CHECKING_MULTIPLYER = 1000;
 
-    public Boolean isTransferSuspicious(Account accountFrom, Account accountTo, BigDecimal moneyToTransfer) {
+    public Boolean isTransferSuspicious(Customer customerSender, Customer customerReciever, BigDecimal moneyToTransfer) {
 
-//        SuspiciousPerson suspiciousPersonFrom = null;
-//        SuspiciousPerson suspiciousPersonTo = null;
-        Boolean personIsSuspicious = isPersonSuspicious(accountFrom, accountTo);
-        Boolean amountIsSuspicious = null;
+        Boolean personIsSuspicious = isPersonSuspicious(customerSender, customerReciever);
+        Boolean amountIsSuspicious = isAmountSuspicious(customerSender, moneyToTransfer);
 
-//        try {
-//            suspiciousPersonFrom = suspiciousPersonRepository
-//                    .findSuspiciousPersonByFirstNameAndLastNameAndPesel(accountFrom.getCustomer().getFirstName(),
-//                            accountFrom.getCustomer().getLastName(), accountFrom.getCustomer().getPesel());
-//            suspiciousPersonTo = suspiciousPersonRepository
-//                    .findSuspiciousPersonByFirstNameAndLastNameAndPesel(accountTo.getCustomer().getFirstName(),
-//                            accountTo.getCustomer().getLastName(), accountTo.getCustomer().getPesel());
-//        } catch (NullPointerException e) {
-//        }
-
-
-        SuspiciousTransferHistory suspiciousTransferHistory = null;
+        SuspiciousTransferHistory suspiciousTransferHistory;
 
         //sprawdzanie czy jedna lub obie osoby sa podejrzane
         //jesli tak to juz mozna zwrocic true
         if (personIsSuspicious) {
-//            isPersonSuspicious = true;
             suspiciousTransferHistory = new SuspiciousTransferHistory();
-            suspiciousTransferHistory.setBankAccountNumberFrom(accountFrom.getBankAccountNumber());
-            suspiciousTransferHistory.setBankAccountNumberTo(accountTo.getBankAccountNumber());
+            suspiciousTransferHistory.setBankAccountNumberFrom(customerSender.getAccount().getBankAccountNumber());
+            suspiciousTransferHistory.setBankAccountNumberTo(customerReciever.getAccount().getBankAccountNumber());
             suspiciousTransferHistory.setDate(LocalDateTime.now());
             suspiciousTransferHistory.setAmount(moneyToTransfer);
             suspiciousTransferHistory.setPersonFromBlackList(true);
         }
 
-        //czy wielkosc przelewu jest podejrzana
-        //wywolac metode ktora zwroci najwieksza transakcje z ostatnich 12 miesiecy
-        //jesli kwota danego przelewu jest wieksza o X (stała w kodzie) od najwiekszej z ost 12 miesciecy -> podejrzane
-
-//        BigDecimal biggestTransactionOfAccountFromInLast12Months;
-//
-//        try {
-//            biggestTransactionOfAccountFromInLast12Months = getBiggestTransactionFromLast12Months(
-//                    accountFrom.getBankAccountNumber());
-//            if(biggestTransactionOfAccountFromInLast12Months.doubleValue() * CHECKING_MULTIPLYER < moneyToTransfer.doubleValue()){
-//                suspiciousTransferHistory.setAmountSuspicious(true);
-//            } else {
-//                suspiciousTransferHistory.setAmountSuspicious(false);
-//            }
-//        } catch (NullPointerException e){}
-
-        if(personIsSuspicious || amountIsSuspicious){
+        if (personIsSuspicious || amountIsSuspicious) {
             return true;
         }
         return false;
     }
 
-    //czy transakcja wykonywana nie jest wieksza niz ostatnie z 12 miesiecy
-//    private List<Optional<BigDecimal>> getBiggestTransactionsFromLast12Months(String firstName, String lastName) {
-//        return Stream
-//                .iterate(1, i -> i+1)
-//                .limit(12)
-//                .map(i -> i % 2 == 0 ? BigDecimal.valueOf(i*1000) : null)
-//                .map(Optional::ofNullable)
-//                .collect(Collectors.toList());
-//    }
-
     //publiczne do testow
     public BigDecimal getBiggestTransferFromLast12Moths(String bankAccountNumber) {
         return getBiggestTransactionFromLast12Months(bankAccountNumber);
     }
-
 
     private BigDecimal getBiggestTransactionFromLast12Months(String bankAccountNumber) {
 
@@ -121,42 +77,43 @@ public class TransferChecker {
 
     }
 
-    private Boolean isPersonSuspicious(Account accountFrom, Account accountTo){
+    private Boolean isPersonSuspicious(Customer customerSender, Customer customerReciever) {
 
         SuspiciousPerson suspiciousPersonFrom = null;
         SuspiciousPerson suspiciousPersonTo = null;
 
         try {
             suspiciousPersonFrom = suspiciousPersonRepository
-                    .findSuspiciousPersonByFirstNameAndLastNameAndPesel(accountFrom.getCustomer().getFirstName(),
-                            accountFrom.getCustomer().getLastName(), accountFrom.getCustomer().getPesel());
+                    .findSuspiciousPersonByFirstNameAndLastNameAndPesel(customerSender.getFirstName(),
+                            customerSender.getLastName(), customerSender.getPesel());
             suspiciousPersonTo = suspiciousPersonRepository
-                    .findSuspiciousPersonByFirstNameAndLastNameAndPesel(accountTo.getCustomer().getFirstName(),
-                            accountTo.getCustomer().getLastName(), accountTo.getCustomer().getPesel());
+                    .findSuspiciousPersonByFirstNameAndLastNameAndPesel(customerReciever.getFirstName(),
+                            customerReciever.getLastName(), customerReciever.getPesel());
         } catch (NullPointerException e) {
         }
 
-        if(suspiciousPersonFrom != null || suspiciousPersonTo != null){
+        if (suspiciousPersonFrom != null || suspiciousPersonTo != null)
             return true;
-        } else
-        return false;
+        else
+            return false;
     }
 
-    private Boolean isAmountSuspicious(Account accountFrom, BigDecimal amountToCheck){
+    private Boolean isAmountSuspicious(Customer customerSender, BigDecimal amountToCheck) {
 
         BigDecimal biggestTransactionOfAccountFromInLast12Months;
+        Boolean amountSuspicious = null;
 
         try {
             biggestTransactionOfAccountFromInLast12Months = getBiggestTransactionFromLast12Months(
-                    accountFrom.getBankAccountNumber());
-            if(biggestTransactionOfAccountFromInLast12Months.doubleValue() * CHECKING_MULTIPLYER < amountToCheck.doubleValue()){
-//                suspiciousTransferHistory.setAmountSuspicious(true);
+                    customerSender.getAccount().getBankAccountNumber());
+            if (biggestTransactionOfAccountFromInLast12Months.doubleValue() * CHECKING_MULTIPLYER < amountToCheck.doubleValue()) {
+                amountSuspicious = true;
             } else {
-//                suspiciousTransferHistory.setAmountSuspicious(false);
+                amountSuspicious = false;
             }
-        } catch (NullPointerException e){}
+        } catch (NullPointerException e) {
+        }
 
-
-        return true;
+        return amountSuspicious;
     }
 }

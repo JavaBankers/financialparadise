@@ -21,16 +21,16 @@ public class AccountController {
         return accountService.getAllAccounts();
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addAccount(@ModelAttribute("firstName") String firstName,
-                             @ModelAttribute("lastName") String lastName,
-                             @ModelAttribute("pesel") String pesel,
-                             @ModelAttribute("email") String email,
-                             @ModelAttribute("password") String password){
-
-        accountService.addAccount(firstName, lastName, pesel, email, password);
-        return "New account has been added";
-    }
+//    @RequestMapping(value = "/add", method = RequestMethod.POST)
+//    public String addAccount(@ModelAttribute("firstName") String firstName,
+//                             @ModelAttribute("lastName") String lastName,
+//                             @ModelAttribute("pesel") String pesel,
+//                             @ModelAttribute("email") String email,
+//                             @ModelAttribute("password") String password){
+//
+//        accountService.addAccount(firstName, lastName, pesel, email, password);
+//        return "New account has been added";
+//    }
 
     @PostMapping("/account")
     public ResponseEntity<String> create(@RequestBody AccountDto account){
