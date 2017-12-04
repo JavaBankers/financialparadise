@@ -19,9 +19,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-public class SuspiciousTransferCheckerTest {
+public class TransferCheckerTest {
 
-    private SuspiciousTransferChecker transferChecker;
+    private TransferChecker transferChecker;
 
     @Mock
     private SuspiciousPersonRepository mockedSuspiciousPersonRepository;
@@ -35,7 +35,7 @@ public class SuspiciousTransferCheckerTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        transferChecker = new SuspiciousTransferChecker(mockedSuspiciousPersonRepository, mockedTransferHistoryService);
+        transferChecker = new TransferChecker(mockedSuspiciousPersonRepository, mockedTransferHistoryService);
     }
 
     @Test
