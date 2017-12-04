@@ -1,4 +1,4 @@
-package com.sda.spring.entity;
+package com.sda.spring.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,14 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 
-@Entity
+
 @Setter
 @Getter
 public class TransferReceiver {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+
+
     private String name;
     private String bankAccountNumber;
     private String title;
@@ -24,4 +23,10 @@ public class TransferReceiver {
 
     public TransferReceiver() {}
 
+    public TransferReceiver(String name, String bankAccountNumber, String title, BigDecimal amount) {
+        this.name = name;
+        this.bankAccountNumber = bankAccountNumber;
+        this.title = title;
+        this.amount = amount;
+    }
 }
