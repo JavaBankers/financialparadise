@@ -19,16 +19,13 @@ public class Account {
     private BigDecimal balance;
     private Currency currency = Currency.PLN;
 
-    @OneToOne
-    private Customer customer;
 
     public Account() {
     }
 
-    public Account(String bankAccountNumber, BigDecimal balance, Currency currency, Customer customer) {
+    public Account(String bankAccountNumber, BigDecimal balance, Currency currency) {
         this.bankAccountNumber = bankAccountNumber;
         this.balance = balance;
         this.currency = currency;
-        this.customer = customer;
     }
 }

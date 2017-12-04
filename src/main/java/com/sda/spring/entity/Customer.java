@@ -21,14 +21,9 @@ public class Customer {
     private String email;
     private String password;
 
-    public Customer() {
-    }
+    @OneToOne
+    private Account account;
 
-    public Customer(String firstName, String lastName, String pesel, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.pesel = pesel;
-        this.email = email;
-        this.password = password;
+    public Customer() {
     }
 }
