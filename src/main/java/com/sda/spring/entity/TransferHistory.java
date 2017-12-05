@@ -23,6 +23,8 @@ public class TransferHistory {
     @Column(name = "bank_account_number_to")
     private String bankAccountNumberTo;
 
+    private String title;
+
     private LocalDateTime date;
 
     private BigDecimal amount;
@@ -30,9 +32,11 @@ public class TransferHistory {
     public TransferHistory() {
     }
 
-    public TransferHistory(String bankAccountNumberFrom, String bankAccountNumberTo, LocalDateTime date, BigDecimal amount) {
+    public TransferHistory(String bankAccountNumberFrom, String bankAccountNumberTo, String title, LocalDateTime date,
+                           BigDecimal amount) {
         this.bankAccountNumberFrom = bankAccountNumberFrom;
         this.bankAccountNumberTo = bankAccountNumberTo;
+        this.title = title;
         this.date = date;
         this.amount = amount;
     }

@@ -53,9 +53,9 @@ public class MoneyTransferServiceTest {
 
     private Object[][] parametersForSpecificTransfers() {
         return new Object[][]{
-                {new BigDecimal("1000"), new BigDecimal("500"), new BigDecimal("500"), new BigDecimal("500"), new BigDecimal("1000")},
-                {new BigDecimal("50.87"), new BigDecimal("180.98"), new BigDecimal("20.69"), new BigDecimal("30.18"), new BigDecimal("201.67")},
-                {new BigDecimal("0.00"), new BigDecimal("150.00"), new BigDecimal("0.00"), new BigDecimal("0.00"), new BigDecimal("150.00")},
+                {new BigDecimal("1000"), new BigDecimal("500"), new BigDecimal("500"), "money", new BigDecimal("500"), new BigDecimal("1000")},
+                {new BigDecimal("50.87"), new BigDecimal("180.98"), new BigDecimal("20.69"), "bucks", new BigDecimal("30.18"), new BigDecimal("201.67")},
+                {new BigDecimal("0.00"), new BigDecimal("150.00"), new BigDecimal("0.00"), "rent", new BigDecimal("0.00"), new BigDecimal("150.00")},
 //            {new BigDecimal(""),new BigDecimal(""),new BigDecimal(""),new BigDecimal(""),new BigDecimal("")},
 //            {new BigDecimal(""),new BigDecimal(""),new BigDecimal(""),new BigDecimal(""),new BigDecimal("")},
 //            {new BigDecimal(""),new BigDecimal(""),new BigDecimal(""),new BigDecimal(""),new BigDecimal("")},
@@ -66,7 +66,8 @@ public class MoneyTransferServiceTest {
     @Test
     @Parameters(method = "parametersForSpecificTransfers")
     public void shouldTransferMoney(BigDecimal accountOneBalance, BigDecimal accountTwoBalance, BigDecimal moneyToTranfer,
-                                    BigDecimal expectedAccountOneBalance, BigDecimal expectedAccountTwoBalance) throws Exception {
+                                    String title, BigDecimal expectedAccountOneBalance, BigDecimal expectedAccountTwoBalance)
+            throws Exception {
 
         Account accountOne = new Account();
         Account accountTwo = new Account();
@@ -80,7 +81,7 @@ public class MoneyTransferServiceTest {
         accountOne.setBalance(accountOneBalance);
         accountTwo.setBalance(accountTwoBalance);
 
-        testedObject.transferMoney(customerSender, customerReciever, moneyToTranfer);
+        testedObject.transferMoney(customerSender, customerReciever, moneyToTranfer, title);
 
         assertThat(accountOne.getBalance()).isEqualTo(expectedAccountOneBalance);
         assertThat(accountTwo.getBalance()).isEqualTo(expectedAccountTwoBalance);
@@ -111,6 +112,6 @@ public class MoneyTransferServiceTest {
         customerReciever.getAccount().setId(2);
         customerReciever.getAccount().setBalance(new BigDecimal("800.00"));
 
-        testedObject.transferMoney(customerSender, customerReciever, new BigDecimal("305.00"));
+        testedObject.transferMoney(customerSender, customerReciever, new BigDecimal("305.00"), "Reservation");
     }
 }
