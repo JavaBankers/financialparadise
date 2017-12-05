@@ -29,23 +29,7 @@ public class TransferChecker {
         Boolean personIsSuspicious = isPersonSuspicious(customerSender, customerReciever);
         Boolean amountIsSuspicious = isAmountSuspicious(customerSender, moneyToTransfer);
 
-        SuspiciousTransferHistory suspiciousTransferHistory;
-
-        //sprawdzanie czy jedna lub obie osoby sa podejrzane
-        //jesli tak to juz mozna zwrocic true
-        if (personIsSuspicious) {
-            suspiciousTransferHistory = new SuspiciousTransferHistory();
-            suspiciousTransferHistory.setBankAccountNumberFrom(customerSender.getAccount().getBankAccountNumber());
-            suspiciousTransferHistory.setBankAccountNumberTo(customerReciever.getAccount().getBankAccountNumber());
-            suspiciousTransferHistory.setDate(LocalDateTime.now());
-            suspiciousTransferHistory.setAmount(moneyToTransfer);
-            suspiciousTransferHistory.setPersonFromBlackList(true);
-        }
-
-        if (personIsSuspicious || amountIsSuspicious) {
-            return true;
-        }
-        return false;
+        return personIsSuspicious || amountIsSuspicious;
     }
 
     //publiczne do testow
@@ -73,7 +57,7 @@ public class TransferChecker {
 
         return transferAmountsFromLast12Months.stream()
                 .max(BigDecimal::compareTo)
-                .orElseThrow(() -> new RuntimeException("Element not found"));
+                .orElse(BigDecimal.ZERO);
 
     }
 
@@ -106,7 +90,7 @@ public class TransferChecker {
         try {
             biggestTransactionOfAccountFromInLast12Months = getBiggestTransactionFromLast12Months(
                     customerSender.getAccount().getBankAccountNumber());
-            if (biggestTransactionOfAccountFromInLast12Months.doubleValue() * CHECKING_MULTIPLYER < amountToCheck.doubleValue()) {
+            if (biggestTransactionOfAccountFromInLast12Months.doubleValue() * CHECKING_MULTIPLYER <= amountToCheck.doubleValue()) {
                 amountSuspicious = true;
             } else {
                 amountSuspicious = false;

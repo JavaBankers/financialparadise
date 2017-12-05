@@ -49,13 +49,6 @@ public class TransferCheckerTest {
         verify(mockedTransferHistoryService, times(1)).getTransferHistoryForSpecificAccount("123");
     }
 
-    @Test
-    public void shouldReturnTransferHistoriesList() throws Exception {
-
-
-
-    }
-
     private List<TransferHistory> getTransferHistoriesList() {
         List<TransferHistory> histories = new LinkedList<>();
         histories.add(new TransferHistory("123", "456",

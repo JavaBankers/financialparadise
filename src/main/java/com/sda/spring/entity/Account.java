@@ -19,7 +19,6 @@ public class Account {
     private BigDecimal balance;
     private Currency currency = Currency.PLN;
 
-
     public Account() {
     }
 
