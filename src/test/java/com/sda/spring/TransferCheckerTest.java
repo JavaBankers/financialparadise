@@ -51,11 +51,11 @@ public class TransferCheckerTest {
 
     private List<TransferHistory> getTransferHistoriesList() {
         List<TransferHistory> histories = new LinkedList<>();
-        histories.add(new TransferHistory("123", "456",
+        histories.add(new TransferHistory("123", "456", "money",
                 LocalDateTime.of(2017, 11, 28, 22, 33), new BigDecimal("355.00")));
-        histories.add(new TransferHistory("123", "456",
+        histories.add(new TransferHistory("123", "456", "bucks",
                 LocalDateTime.of(2017, 10, 28, 22, 33), new BigDecimal("855.22")));
-        histories.add(new TransferHistory("123", "456",
+        histories.add(new TransferHistory("123", "456", "rent",
                 LocalDateTime.of(2017, 11, 28, 22, 33), new BigDecimal("145.37")));
         return histories;
     }

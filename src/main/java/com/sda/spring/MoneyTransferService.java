@@ -29,7 +29,7 @@ public class MoneyTransferService {
         this.transferHistoryRepository = transferHistoryRepository;
     }
 
-    public void transferMoney(Customer customerSender, Customer customerReciever, BigDecimal moneyToTransfer) {
+    public void transferMoney(Customer customerSender, Customer customerReciever, BigDecimal moneyToTransfer, String title) {
 
         TransferHistory transferHistory;
         SuspiciousTransferHistory suspiciousTransferHistory;
@@ -40,6 +40,7 @@ public class MoneyTransferService {
                     .withAmount(moneyToTransfer)
                     .withBankAccountNumberFrom(customerSender.getAccount().getBankAccountNumber())
                     .withBankAccountNumberTo(customerReciever.getAccount().getBankAccountNumber())
+                    .withTitle(title)
                     .withDate(LocalDateTime.now())
                     .build();
 
@@ -53,6 +54,7 @@ public class MoneyTransferService {
             transferHistory = new TransferHistory(
                     customerSender.getAccount().getBankAccountNumber(),
                     customerReciever.getAccount().getBankAccountNumber(),
+                    title,
                     LocalDateTime.now(),
                     moneyToTransfer);
             transferHistoryRepository.save(transferHistory);
