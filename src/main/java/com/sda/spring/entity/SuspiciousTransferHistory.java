@@ -19,20 +19,54 @@ public class SuspiciousTransferHistory {
     private String bankAccountNumberTo;
     private LocalDateTime date;
     private BigDecimal amount;
-    private Boolean amountSuspicious;
-    private Boolean personFromBlackList;
 
     public SuspiciousTransferHistory() {
     }
 
+    public SuspiciousTransferHistory(Builder builder){
+        this.bankAccountNumberFrom = builder.bankAccountNumberFrom;
+        this.bankAccountNumberTo = builder.bankAccountNumberTo;
+        this.date = builder.date;
+        this.amount = builder.amount;
+    }
+
     public SuspiciousTransferHistory(String bankAccountNumberFrom, String bankAccountNumberTo, LocalDateTime date,
-                                     BigDecimal amount, Boolean amountSuspicious, Boolean personFromBlackList) {
+                                     BigDecimal amount) {
         this.bankAccountNumberFrom = bankAccountNumberFrom;
         this.bankAccountNumberTo = bankAccountNumberTo;
         this.date = date;
         this.amount = amount;
-        this.amountSuspicious = amountSuspicious;
-        this.personFromBlackList = personFromBlackList;
+    }
+    
+    public static class Builder{
+        private String bankAccountNumberFrom;
+        private String bankAccountNumberTo;
+        private LocalDateTime date;
+        private BigDecimal amount;
+
+        public Builder withBankAccountNumberFrom(String bankAccountNumberFrom) {
+            this.bankAccountNumberFrom = bankAccountNumberFrom;
+            return this;
+        }
+
+        public Builder withBankAccountNumberTo(String bankAccountNumberTo) {
+            this.bankAccountNumberTo = bankAccountNumberTo;
+            return this;
+        }
+
+        public Builder withDate(LocalDateTime date) {
+            this.date = date;
+            return this;
+        }
+
+        public Builder withAmount(BigDecimal amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        public SuspiciousTransferHistory build(){
+            return new SuspiciousTransferHistory(this);
+        }
     }
 }
 
