@@ -31,7 +31,9 @@ public class CustomerController {
 
     @PostMapping(value = CUSTOMER_URL)
     public String addCustomer(@RequestBody Customer customer) {
+        accountService.save(customer.getAccount());
         customerService.save(customer);
+
         return "New customer has been added";
     }
 
