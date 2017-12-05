@@ -51,12 +51,14 @@ public class MoneyTransferService {
                 .getBalance().compareTo(BALANCE_LIMIT) >= 0) {
             customerSender.getAccount().setBalance(customerSender.getAccount().getBalance().subtract(moneyToTransfer));
             customerReciever.getAccount().setBalance(customerReciever.getAccount().getBalance().add(moneyToTransfer));
-            transferHistory = new TransferHistory(
-                    customerSender.getAccount().getBankAccountNumber(),
-                    customerReciever.getAccount().getBankAccountNumber(),
-                    title,
-                    LocalDateTime.now(),
-                    moneyToTransfer);
+            transferHistory = new TransferHistory.Builder()
+                    .withAmount(moneyToTransfer)
+                    .withBankAccountNumberFrom(customerSender.getAccount().getBankAccountNumber())
+                    .withBankAccountNumberTo(customerReciever.getAccount().getBankAccountNumber())
+                    .withTitle(title)
+                    .withDate(LocalDateTime.now())
+                    .build();
+
             transferHistoryRepository.save(transferHistory);
         } else {
             throw new InsufficientFundsException();
