@@ -1,6 +1,7 @@
 package com.sda.spring.controller;
 
 import com.sda.spring.entity.Customer;
+import com.sda.spring.service.AccountService;
 import com.sda.spring.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private AccountService accountService;
 
     @GetMapping(CUSTOMER_URL + "/list")
     public List<Customer> getAllCustomers() {

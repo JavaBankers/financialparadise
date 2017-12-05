@@ -47,6 +47,11 @@ public class AccountService {
     }
 
     @Transactional
+    public void save(Account account){
+        accountRepository.save(account);
+    }
+
+    @Transactional
     public void updateAccount(Account account) {
         accountRepository.save(account);
     }
