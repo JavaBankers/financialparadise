@@ -3,6 +3,8 @@ package com.sda.spring.service;
 import com.sda.spring.entity.Customer;
 import com.sda.spring.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

@@ -4,6 +4,8 @@ import com.sda.spring.entity.Customer;
 import com.sda.spring.service.AccountService;
 import com.sda.spring.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,11 +15,15 @@ public class CustomerController {
 
     private static final String CUSTOMER_URL = "/v1/customer";
 
-    @Autowired
     private CustomerService customerService;
 
-    @Autowired
     private AccountService accountService;
+
+    @Autowired
+    public CustomerController(CustomerService customerService, AccountService accountService) {
+        this.customerService = customerService;
+        this.accountService = accountService;
+    }
 
     @GetMapping(CUSTOMER_URL + "/list")
     public List<Customer> getAllCustomers() {
@@ -30,23 +36,23 @@ public class CustomerController {
     }
 
     @PostMapping(value = CUSTOMER_URL)
-    public String addCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<String> addCustomer(@RequestBody Customer customer) {
         accountService.save(customer.getAccount());
         customerService.save(customer);
 
-        return "New customer has been added";
+        return new ResponseEntity<>("New customer has been added", HttpStatus.CREATED);
     }
 
     @PutMapping(value = CUSTOMER_URL)
-    public String updateCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<String> updateCustomer(@RequestBody Customer customer) {
         accountService.save(customer.getAccount());
         customerService.save(customer);
-        return "Customer has been updated";
+        return new ResponseEntity<>("Customer has been updated", HttpStatus.OK);
     }
 
-    @DeleteMapping(value = CUSTOMER_URL+ "/{id}")
-    public String deleteCustomer(@PathVariable("id") Integer id) {
+    @DeleteMapping(value = CUSTOMER_URL + "/{id}")
+    public ResponseEntity<?> deleteCustomer(@PathVariable("id") Integer id) {
         customerService.deleteCustomerById(id);
-        return "Customer has been deleted";
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
