@@ -33,7 +33,6 @@ public class CustomerController {
     public String addCustomer(@RequestBody Customer customer) {
         accountService.save(customer.getAccount());
         customerService.save(customer);
-
         return "New customer has been added";
     }
 
@@ -48,5 +47,11 @@ public class CustomerController {
     public String deleteCustomer(@PathVariable("id") Integer id) {
         customerService.deleteCustomerById(id);
         return "Customer has been deleted";
+    }
+
+    @GetMapping(CUSTOMER_URL + "/send" + "{email}")
+    public Customer getCustomerByEmail(@PathVariable("email") String email) {
+        Customer customer = customerService.getCustomerByEmail(email);
+        return customer;
     }
 }
