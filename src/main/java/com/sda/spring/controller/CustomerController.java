@@ -39,8 +39,8 @@ public class CustomerController {
     public ResponseEntity<String> addCustomer(@RequestBody Customer customer) {
         accountService.save(customer.getAccount());
         customerService.save(customer);
-
         return new ResponseEntity<>("New customer has been added", HttpStatus.CREATED);
+
     }
 
     @PutMapping(value = CUSTOMER_URL)
@@ -54,5 +54,11 @@ public class CustomerController {
     public ResponseEntity<?> deleteCustomer(@PathVariable("id") Integer id) {
         customerService.deleteCustomerById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(CUSTOMER_URL + "/send" + "{email}")
+    public Customer getCustomerByEmail(@PathVariable("email") String email) {
+        Customer customer = customerService.getCustomerByEmail(email);
+        return customer;
     }
 }

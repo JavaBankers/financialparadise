@@ -38,14 +38,15 @@ public class CustomerService {
         return customers;
     }
 
-//    @Transactional
-//    public void updateCustomer(String firstName,
-//                               String lastName,
-//                               String pesel,
-//                               String email,
-//                               String password){
-//        save(firstName,lastName,pesel,email,password);
-//    }
+    @Transactional
+    public Customer getCustomerByAccountNumber(String accountNumber){
+        return customerRepository.findCustomerByAccount_BankAccountNumber(accountNumber);
+    }
+
+    @Transactional
+    public Customer getCustomerByEmail(String email){
+        return customerRepository.findCustomerByEmail(email);
+    }
 
     @Transactional
     public void deleteCustomerById(Integer id){

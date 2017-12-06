@@ -2,11 +2,9 @@ package com.sda.spring;
 
 import com.sda.spring.entity.Account;
 import com.sda.spring.entity.Customer;
-import com.sda.spring.entity.SuspiciousPerson;
-import com.sda.spring.entity.TransferHistory;
-import com.sda.spring.repository.SuspiciousPersonRepository;
 import com.sda.spring.repository.SuspiciousTransferHistoryRepository;
 import com.sda.spring.repository.TransferHistoryRepository;
+import com.sda.spring.service.MoneyTransferService;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Before;
@@ -19,7 +17,6 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.MockitoAnnotations.initMocks;
