@@ -15,20 +15,12 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
     @Transactional
-    public void addCustomer(String firstName,
-                            String lastName,
-                            String pesel,
-                            String email,
-                            String password){
-
-        Customer customer = new Customer();
-        customer.setFirstName(firstName);
-        customer.setLastName(lastName);
-        customer.setPesel(pesel);
-        customer.setEmail(email);
-        customer.setPassword(password);
-
+    public void save(Customer customer){
         customerRepository.save(customer);
     }
 
@@ -40,18 +32,18 @@ public class CustomerService {
     @Transactional
     public List<Customer> getAllCustomers(){
         List<Customer> customers = new ArrayList<>();
-        Iterable<Customer> iterable = customerRepository.findAll();
-        iterable.forEach(e -> customers.add(e));
+        customerRepository.findAll().forEach(e -> customers.add(e));
         return customers;
     }
 
     @Transactional
-    public void updateCustomer(String firstName,
-                               String lastName,
-                               String pesel,
-                               String email,
-                               String password){
-        addCustomer(firstName,lastName,pesel,email,password);
+    public Customer getCustomerByAccountNumber(String accountNumber){
+        return customerRepository.findCustomerByAccount_BankAccountNumber(accountNumber);
+    }
+
+    @Transactional
+    public Customer getCustomerByEmail(String email){
+        return customerRepository.findCustomerByEmail(email);
     }
 
     @Transactional

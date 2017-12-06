@@ -1,50 +1,57 @@
 package com.sda.spring.controller;
 
 import com.sda.spring.entity.Customer;
+import com.sda.spring.service.AccountService;
 import com.sda.spring.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/customers")
 public class CustomerController {
+
+    private static final String CUSTOMER_URL = "/v1/customer";
 
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping("/find/all")
-    public List<Customer> getAllCustomers(){
+    @Autowired
+    private AccountService accountService;
+
+    @GetMapping(CUSTOMER_URL + "/list")
+    public List<Customer> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 
-    @GetMapping("/find/{id}")
-    public Customer getCustomerById(@PathVariable("id") Integer id){
+    @GetMapping(CUSTOMER_URL + "/{id}")
+    public Customer getCustomerById(@PathVariable("id") Integer id) {
         return customerService.getCustomerById(id);
     }
 
-    @PutMapping(value = "/update")
-    public String updateCustomer(@ModelAttribute String firstName,
-                                 @ModelAttribute String lastName,
-                                 @ModelAttribute String pesel,
-                                 @ModelAttribute String email,
-                                 @ModelAttribute String password){
+    @PostMapping(value = CUSTOMER_URL)
+    public String addCustomer(@RequestBody Customer customer) {
+        accountService.save(customer.getAccount());
+        customerService.save(customer);
+        return "New customer has been added";
+    }
 
-        customerService.updateCustomer(firstName,lastName,pesel,email,password);
+    @PutMapping(value = CUSTOMER_URL)
+    public String updateCustomer(@RequestBody Customer customer) {
+        accountService.save(customer.getAccount());
+        customerService.save(customer);
         return "Customer has been updated";
     }
 
+    @DeleteMapping(value = CUSTOMER_URL+ "/{id}")
+    public String deleteCustomer(@PathVariable("id") Integer id) {
+        customerService.deleteCustomerById(id);
+        return "Customer has been deleted";
+    }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addCustomer(@ModelAttribute String firstName,
-                              @ModelAttribute String lastName,
-                              @ModelAttribute String pesel,
-                              @ModelAttribute String email,
-                              @ModelAttribute String password){
-
-        customerService.addCustomer(firstName,lastName,pesel,email,password);
-        return "New customer has been added";
+    @GetMapping(CUSTOMER_URL + "/send" + "{email}")
+    public Customer getCustomerByEmail(@PathVariable("email") String email) {
+        Customer customer = customerService.getCustomerByEmail(email);
+        return customer;
     }
 }
