@@ -1,5 +1,8 @@
 package com.sda.spring;
 
+import com.sda.spring.entity.Account;
+import com.sda.spring.entity.Customer;
+import com.sda.spring.entity.SuspiciousPerson;
 import com.sda.spring.entity.TransferHistory;
 import com.sda.spring.repository.SuspiciousPersonRepository;
 import com.sda.spring.service.TransferHistoryService;
@@ -21,7 +24,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 public class TransferCheckerTest {
 
-    private TransferChecker transferChecker;
+    private TransferChecker testedObject;
 
     @Mock
     private SuspiciousPersonRepository mockedSuspiciousPersonRepository;
@@ -35,18 +38,44 @@ public class TransferCheckerTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        transferChecker = new TransferChecker(mockedSuspiciousPersonRepository, mockedTransferHistoryService);
+        testedObject = new TransferChecker(mockedSuspiciousPersonRepository, mockedTransferHistoryService);
     }
 
     @Test
-    public void shouldReturnBiggestTransaction() throws Exception {
+    public void shouldReturnTrueWhenSuspiciousPersonIsIdentified() throws Exception {
 
-        when(mockedTransferHistoryService.getTransferHistoryForSpecificAccount("123")).thenReturn(getTransferHistoriesList());
+        Customer sender = new Customer("Cpt", "Hook", "12345678910", "hook@yahoo.com",
+                "dupa123", new Account("123", new BigDecimal("1500.89"), Currency.PLN));
+        Customer reciever = new Customer("Ali", "Baba", "56345678911", "ali@gmail.com",
+                "twojastara123", new Account("456", new BigDecimal("2784.13"), Currency.PLN));
+        SuspiciousPerson badGuy = new SuspiciousPerson("Cpt", "Hook", "12345678910");
 
-        BigDecimal result = transferChecker.getBiggestTransferFromLast12Moths("123");
+        when(mockedSuspiciousPersonRepository.findSuspiciousPersonByFirstNameAndLastNameAndPesel("Cpt", "Hook",
+                "12345678910")).thenReturn(badGuy);
+        when(mockedTransferHistoryService.getTransferHistoryForSpecificAccount("123"))
+                .thenReturn(getTransferHistoriesList());
 
-        assertThat(result).isEqualTo(new BigDecimal("855.22"));
-        verify(mockedTransferHistoryService, times(1)).getTransferHistoryForSpecificAccount("123");
+        Boolean suspiciousPerson = testedObject.isTransferSuspicious(sender, reciever, new BigDecimal("250.00"));
+
+        assertThat(suspiciousPerson).isEqualTo(true);
+    }
+
+    @Test
+    public void shouldReturnFalseWhenSuspiciousPersonIsNotIdentified() throws Exception {
+
+        Customer sender = new Customer("Tom", "Hanks", "44445678910", "forrest@gmail.com",
+                "bubbagump", new Account("123", new BigDecimal("543.79"), Currency.PLN));
+        Customer reciever = new Customer("Jenny", "Gump", "22345678911", "jennyg@gmail.com",
+                "chocolate", new Account("654", new BigDecimal("2784.13"), Currency.PLN));
+
+        when(mockedSuspiciousPersonRepository.findSuspiciousPersonByFirstNameAndLastNameAndPesel("Tom", "Hanks",
+                "44445678910")).thenReturn(null);
+        when(mockedTransferHistoryService.getTransferHistoryForSpecificAccount("123"))
+                .thenReturn(getTransferHistoriesList());
+
+        Boolean suspiciousPerson = testedObject.isTransferSuspicious(sender, reciever, new BigDecimal("140.50"));
+
+        assertThat(suspiciousPerson).isEqualTo(false);
     }
 
     private List<TransferHistory> getTransferHistoriesList() {
