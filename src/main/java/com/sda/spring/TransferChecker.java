@@ -32,11 +32,6 @@ public class TransferChecker {
         return personIsSuspicious || amountIsSuspicious;
     }
 
-    //publiczne do testow
-    public BigDecimal getBiggestTransferFromLast12Moths(String bankAccountNumber) {
-        return getBiggestTransactionFromLast12Months(bankAccountNumber);
-    }
-
     private BigDecimal getBiggestTransactionFromLast12Months(String bankAccountNumber) {
 
         LocalDateTime currentDate = LocalDateTime.now();
@@ -76,10 +71,7 @@ public class TransferChecker {
         } catch (NullPointerException e) {
         }
 
-        if (suspiciousPersonFrom != null || suspiciousPersonTo != null)
-            return true;
-        else
-            return false;
+        return suspiciousPersonFrom != null || suspiciousPersonTo != null;
     }
 
     private Boolean isAmountSuspicious(Customer customerSender, BigDecimal amountToCheck) {
@@ -97,7 +89,6 @@ public class TransferChecker {
             }
         } catch (NullPointerException e) {
         }
-
         return amountSuspicious;
     }
 }

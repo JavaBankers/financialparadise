@@ -56,9 +56,6 @@ public class MoneyTransferServiceTest {
                 {new BigDecimal("1000"), new BigDecimal("500"), new BigDecimal("500"), "money", new BigDecimal("500"), new BigDecimal("1000")},
                 {new BigDecimal("50.87"), new BigDecimal("180.98"), new BigDecimal("20.69"), "bucks", new BigDecimal("30.18"), new BigDecimal("201.67")},
                 {new BigDecimal("0.00"), new BigDecimal("150.00"), new BigDecimal("0.00"), "rent", new BigDecimal("0.00"), new BigDecimal("150.00")},
-//            {new BigDecimal(""),new BigDecimal(""),new BigDecimal(""),new BigDecimal(""),new BigDecimal("")},
-//            {new BigDecimal(""),new BigDecimal(""),new BigDecimal(""),new BigDecimal(""),new BigDecimal("")},
-//            {new BigDecimal(""),new BigDecimal(""),new BigDecimal(""),new BigDecimal(""),new BigDecimal("")},
         };
     }
 
