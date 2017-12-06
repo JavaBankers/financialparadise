@@ -39,6 +39,7 @@ public class CustomerController {
 
     @PutMapping(value = CUSTOMER_URL)
     public String updateCustomer(@RequestBody Customer customer) {
+        accountService.save(customer.getAccount());
         customerService.save(customer);
         return "Customer has been updated";
     }
