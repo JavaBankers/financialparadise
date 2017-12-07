@@ -16,9 +16,9 @@ public class MoneyTransferController {
 
     private static final String TRANSFER_URL = "/v1/transfer";
 
-    MoneyTransferService moneyTransferService;
+    private MoneyTransferService moneyTransferService;
 
-    CustomerService customerService;
+    private CustomerService customerService;
 
     @Autowired
     public MoneyTransferController(MoneyTransferService moneyTransferService, CustomerService customerService) {

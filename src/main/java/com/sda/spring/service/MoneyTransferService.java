@@ -25,15 +25,16 @@ public class MoneyTransferService {
 
     private SuspiciousTransferHistoryRepository suspiciousTransferHistoryRepository;
 
-    @Autowired
     AccountService accountService;
 
     @Autowired
     public MoneyTransferService(SuspiciousTransferHistoryRepository suspiciousTransferHistoryRepository,
-                                TransferChecker transferChecker, TransferHistoryRepository transferHistoryRepository) {
+                                TransferChecker transferChecker, TransferHistoryRepository transferHistoryRepository,
+                                AccountService accountService) {
         this.suspiciousTransferHistoryRepository = suspiciousTransferHistoryRepository;
         this.transferChecker = transferChecker;
         this.transferHistoryRepository = transferHistoryRepository;
+        this.accountService = accountService;
     }
 
     public void transferMoney(Customer customerSender, Customer customerReciever, BigDecimal moneyToTransfer, String title) {
