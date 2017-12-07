@@ -5,7 +5,6 @@ import com.sda.spring.repository.TransferHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -30,6 +29,6 @@ public class TransferHistoryService {
     }
 
     public List<TransferHistory> getTransferHistoryForSpecificAccount(String bankAccountNumber){
-        return transferHistoryRepository.findTransferHistoriesByBankAccountNumberFrom(bankAccountNumber);
+        return transferHistoryRepository.findTransferHistoriesByBankAccountNumberFromOrderByDateDesc(bankAccountNumber);
     }
 }
