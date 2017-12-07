@@ -65,7 +65,10 @@ public class CustomerControllerTest {
         ResponseEntity<String> desiredResponse = new ResponseEntity<>("New customer has been added", HttpStatus.CREATED);
         Customer customerToAdd = new Customer();
 
-        when(testedObject.addCustomer(customerToAdd)).thenReturn(desiredResponse);
+//        when(testedObject.addCustomer(customerToAdd)).thenReturn(desiredResponse);
+//        when(mockedCustomerService.save(customerToAdd);).thenReturn(desiredResponse);
+
+        doNothing().when(mockedCustomerService).save(customerToAdd);
 
         ResponseEntity<String> response = testedObject.addCustomer(customerToAdd);
 
