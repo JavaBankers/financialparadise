@@ -1,4 +1,4 @@
-package com.sda.spring;
+package com.sda.spring.dto;
 
 import com.sda.spring.dto.CustomerWithTransferReceiver;
 import com.sda.spring.dto.TransferReceiver;

@@ -1,5 +1,7 @@
-package com.sda.spring;
+package com.sda.spring.service;
 
+import com.sda.spring.InsufficientFundsException;
+import com.sda.spring.TransferChecker;
 import com.sda.spring.entity.Account;
 import com.sda.spring.entity.Customer;
 import com.sda.spring.repository.SuspiciousTransferHistoryRepository;

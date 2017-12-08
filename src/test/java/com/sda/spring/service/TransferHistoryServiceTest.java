@@ -1,4 +1,4 @@
-package com.sda.spring;
+package com.sda.spring.service;
 
 import com.sda.spring.entity.TransferHistory;
 import com.sda.spring.repository.TransferHistoryRepository;
@@ -33,7 +33,7 @@ public class TransferHistoryServiceTest {
     @Test
     public void shouldReturnAllTransferHistories() throws Exception {
 
-        when(testedObject.getAllTransferHistories()).thenReturn(getAllTransferHistories());
+        when(mockedTransferHistoryRepository.findAll()).thenReturn(getAllTransferHistories());
 
         List<TransferHistory> thList = testedObject.getAllTransferHistories();
 

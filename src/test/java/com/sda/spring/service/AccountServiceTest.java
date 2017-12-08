@@ -1,4 +1,4 @@
-package com.sda.spring;
+package com.sda.spring.service;
 
 import com.sda.spring.entity.Account;
 import com.sda.spring.repository.AccountRepository;

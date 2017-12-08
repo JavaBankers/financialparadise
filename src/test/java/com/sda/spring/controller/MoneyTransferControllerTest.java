@@ -1,4 +1,4 @@
-package com.sda.spring;
+package com.sda.spring.controller;
 
 import com.sda.spring.controller.MoneyTransferController;
 import com.sda.spring.dto.CustomerWithTransferReceiver;

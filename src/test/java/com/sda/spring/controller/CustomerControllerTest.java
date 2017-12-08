@@ -1,4 +1,4 @@
-package com.sda.spring;
+package com.sda.spring.controller;
 
 import com.sda.spring.controller.CustomerController;
 import com.sda.spring.entity.Customer;
