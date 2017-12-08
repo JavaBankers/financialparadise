@@ -10,9 +10,9 @@ import java.util.List;
 @Service
 public class TransferHistoryService {
 
-    @Autowired
     private TransferHistoryRepository transferHistoryRepository = null;
 
+    @Autowired
     public TransferHistoryService(TransferHistoryRepository transferHistoryRepository) {
         this.transferHistoryRepository = transferHistoryRepository;
     }
