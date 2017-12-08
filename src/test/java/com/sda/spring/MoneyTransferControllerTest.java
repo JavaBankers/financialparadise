@@ -71,7 +71,6 @@ public class MoneyTransferControllerTest {
         assertThat(response).isEqualTo(desiredResponse);
         verify(mockedMoneyTransferService, times(1)).transferMoney(customerSender, customerReciever,
                 new BigDecimal("25.00"), "Title");
-
     }
 }
 

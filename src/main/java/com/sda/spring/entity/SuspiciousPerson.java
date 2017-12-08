@@ -23,7 +23,6 @@ public class SuspiciousPerson {
     public SuspiciousPerson() {
     }
 
-
     public SuspiciousPerson(String firstName, String lastName, String pesel) {
         this.firstName = firstName;
         this.lastName = lastName;

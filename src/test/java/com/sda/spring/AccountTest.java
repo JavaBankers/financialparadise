@@ -1,7 +1,6 @@
 package com.sda.spring;
 
 import com.sda.spring.entity.Account;
-import com.sda.spring.entity.Customer;
 import org.junit.Before;
 import org.junit.Test;
 
