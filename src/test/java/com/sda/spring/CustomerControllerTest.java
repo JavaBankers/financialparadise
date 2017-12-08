@@ -65,9 +65,6 @@ public class CustomerControllerTest {
         ResponseEntity<String> desiredResponse = new ResponseEntity<>("New customer has been added", HttpStatus.CREATED);
         Customer customerToAdd = new Customer();
 
-//        when(testedObject.addCustomer(customerToAdd)).thenReturn(desiredResponse);
-//        when(mockedCustomerService.save(customerToAdd);).thenReturn(desiredResponse);
-
         doNothing().when(mockedCustomerService).save(customerToAdd);
 
         ResponseEntity<String> response = testedObject.addCustomer(customerToAdd);
@@ -88,8 +85,6 @@ public class CustomerControllerTest {
 
         assertThat(response).isEqualTo(desiredResponse);
         verify(mockedCustomerService,times(1)).deleteCustomerById(69);
-
-
     }
 
     private List<Customer> getCustomersList(){
