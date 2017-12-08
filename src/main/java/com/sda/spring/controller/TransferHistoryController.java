@@ -14,8 +14,12 @@ public class TransferHistoryController {
 
     private static final String HISTORY_URL = "/v1/customer/history";
 
+    private TransferHistoryService transferHistoryService;
+
     @Autowired
-    TransferHistoryService transferHistoryService;
+    public TransferHistoryController(TransferHistoryService transferHistoryService) {
+        this.transferHistoryService = transferHistoryService;
+    }
 
     @GetMapping(HISTORY_URL + "/list" + "{accountNumber}")
     public List<TransferHistory> getAllTransferHistoryForSpecificAccount(@PathVariable("accountNumber")String accountNumber) {
