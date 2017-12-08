@@ -5,6 +5,7 @@ import com.sda.spring.repository.TransferHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -18,10 +19,9 @@ public class TransferHistoryService {
     }
 
     public List<TransferHistory> getAllTransferHistories(){
-//        List<TransferHistory> transferHistories = new LinkedList<>();
-//        transferHistoryRepository.findAll().forEach(e -> transferHistories.add(e));
-//        return transferHistories;
-        return (List<TransferHistory>) transferHistoryRepository.findAll();
+        List<TransferHistory> transferHistories = new LinkedList<>();
+        transferHistoryRepository.findAll().forEach(e -> transferHistories.add(e));
+        return transferHistories;
     }
 
     public void addTransferHistory(TransferHistory transferHistory){

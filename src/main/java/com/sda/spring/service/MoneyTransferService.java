@@ -25,7 +25,7 @@ public class MoneyTransferService {
 
     private SuspiciousTransferHistoryRepository suspiciousTransferHistoryRepository;
 
-    AccountService accountService;
+    private AccountService accountService;
 
     @Autowired
     public MoneyTransferService(SuspiciousTransferHistoryRepository suspiciousTransferHistoryRepository,

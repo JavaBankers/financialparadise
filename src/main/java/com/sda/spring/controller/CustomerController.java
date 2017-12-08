@@ -40,7 +40,6 @@ public class CustomerController {
         accountService.save(customer.getAccount());
         customerService.save(customer);
         return new ResponseEntity<>("New customer has been added", HttpStatus.CREATED);
-
     }
 
     @PutMapping(value = CUSTOMER_URL)
