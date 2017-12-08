@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class MoneyTransferService {
@@ -51,6 +53,10 @@ public class MoneyTransferService {
                     .withTitle(title)
                     .withDate(LocalDateTime.now())
                     .build();
+
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+//            LocalDateTime now = LocalDateTime.now();
+//            String formattedDateTime = now.format(formatter);
 
             suspiciousTransferHistoryRepository.save(suspiciousTransferHistory);
             accountService.save(customerSender.getAccount());
