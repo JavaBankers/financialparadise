@@ -57,7 +57,6 @@ public class CustomerController {
 
     @GetMapping(CUSTOMER_URL + "/send" + "{email}")
     public Customer getCustomerByEmail(@PathVariable("email") String email) {
-        Customer customer = customerService.getCustomerByEmail(email);
-        return customer;
+        return customerService.getCustomerByEmail(email);
     }
 }
