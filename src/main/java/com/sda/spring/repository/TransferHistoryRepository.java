@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface TransferHistoryRepository extends CrudRepository<TransferHistory, Integer> {
 
-    List<TransferHistory> findTransferHistoriesByBankAccountNumberFrom(String bankAccountNumber);
-
+    List<TransferHistory> findTransferHistoriesByBankAccountNumberFromOrderByDateDesc(String bankAccountNumber);
 }

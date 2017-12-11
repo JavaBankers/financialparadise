@@ -12,9 +12,9 @@ import java.util.List;
 @Service
 public class CustomerService {
 
-    @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
@@ -38,7 +38,7 @@ public class CustomerService {
 
     @Transactional
     public Customer getCustomerByAccountNumber(String accountNumber){
-        return customerRepository.findCustomerByAccount_BankAccountNumber(accountNumber);
+        return customerRepository.findCustomerByAccountBankAccountNumber(accountNumber);
     }
 
     @Transactional

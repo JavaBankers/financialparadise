@@ -11,18 +11,17 @@ import java.util.List;
 @Service
 public class TransferHistoryService {
 
-    @Autowired
     private TransferHistoryRepository transferHistoryRepository = null;
 
+    @Autowired
     public TransferHistoryService(TransferHistoryRepository transferHistoryRepository) {
         this.transferHistoryRepository = transferHistoryRepository;
     }
 
     public List<TransferHistory> getAllTransferHistories(){
-//        List<TransferHistory> transferHistories = new LinkedList<>();
-//        transferHistoryRepository.findAll().forEach(e -> transferHistories.add(e));
-//        return transferHistories;
-        return (List<TransferHistory>) transferHistoryRepository.findAll();
+        List<TransferHistory> transferHistories = new LinkedList<>();
+        transferHistoryRepository.findAll().forEach(e -> transferHistories.add(e));
+        return transferHistories;
     }
 
     public void addTransferHistory(TransferHistory transferHistory){
@@ -30,6 +29,6 @@ public class TransferHistoryService {
     }
 
     public List<TransferHistory> getTransferHistoryForSpecificAccount(String bankAccountNumber){
-        return transferHistoryRepository.findTransferHistoriesByBankAccountNumberFrom(bankAccountNumber);
+        return transferHistoryRepository.findTransferHistoriesByBankAccountNumberFromOrderByDateDesc(bankAccountNumber);
     }
 }

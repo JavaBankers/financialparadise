@@ -1,4 +1,4 @@
-package com.sda.spring;
+package com.sda.spring.entity;
 
 import com.sda.spring.entity.SuspiciousTransferHistory;
 import org.junit.Before;

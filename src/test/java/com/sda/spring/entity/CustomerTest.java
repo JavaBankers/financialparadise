@@ -1,4 +1,4 @@
-package com.sda.spring;
+package com.sda.spring.entity;
 
 import com.sda.spring.entity.Customer;
 import org.junit.Before;

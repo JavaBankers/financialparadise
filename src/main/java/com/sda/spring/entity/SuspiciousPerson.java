@@ -2,7 +2,6 @@ package com.sda.spring.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +21,6 @@ public class SuspiciousPerson {
 
     public SuspiciousPerson() {
     }
-
 
     public SuspiciousPerson(String firstName, String lastName, String pesel) {
         this.firstName = firstName;

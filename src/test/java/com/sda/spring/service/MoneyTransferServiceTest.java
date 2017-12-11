@@ -1,9 +1,12 @@
-package com.sda.spring;
+package com.sda.spring.service;
 
+import com.sda.spring.InsufficientFundsException;
+import com.sda.spring.TransferChecker;
 import com.sda.spring.entity.Account;
 import com.sda.spring.entity.Customer;
 import com.sda.spring.repository.SuspiciousTransferHistoryRepository;
 import com.sda.spring.repository.TransferHistoryRepository;
+import com.sda.spring.service.AccountService;
 import com.sda.spring.service.MoneyTransferService;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -41,11 +44,14 @@ public class MoneyTransferServiceTest {
     @Mock
     private TransferChecker mockedTransferChecker;
 
+    @Mock
+    private AccountService mockedAccountService;
+
     @Before
     public void setUp() throws Exception {
         initMocks(this);
         testedObject = new MoneyTransferService(mockedSuspiciousTransferHistoryRepository, mockedTransferChecker,
-                mockedTransferHistoryRepository);
+                mockedTransferHistoryRepository, mockedAccountService);
     }
 
     private Object[][] parametersForSpecificTransfers() {
