@@ -1,5 +1,7 @@
 package com.sda.spring.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.sda.spring.handler.LocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -17,6 +19,7 @@ public class SuspiciousTransferHistory {
     private String bankAccountNumberFrom;
     private String bankAccountNumberTo;
     private String title;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime date;
     private BigDecimal amount;
 
